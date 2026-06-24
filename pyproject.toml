@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-replay"
+version = "0.1.0"
+description = "Stop paying for the same AI response twice. Zero-dependency LLM response caching for developers."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+keywords = ["llm", "cache", "openai", "anthropic", "developer-tools", "llmops"]
+
+# This is the entire point of our library - zero runtime dependencies.
+dependencies = []
+
+authors = [
+  { name = "Arnav Shrivastava", email = "arnavshrivastava01@gmail.com" }
+]
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Arnav-Shrivastava/llm-replay"
+Repository = "https://github.com/Arnav-Shrivastava/llm-replay"
+"Bug Tracker" = "https://github.com/Arnav-Shrivastava/llm-replay/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
