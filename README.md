@@ -1,8 +1,8 @@
-# llm-replay ⚡
+# llm-replay-py ⚡
 
 > Stop paying for the same AI response twice.
 
-`llm-replay` is a zero-dependency Python library that caches LLM API responses to disk. Add one line to your existing code. Every repeated call during development is instant and free.
+`llm-replay-py` is a zero-dependency Python library that caches LLM API responses to disk. Add one line to your existing code. Every repeated call during development is instant and free.
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -23,7 +23,8 @@ def ask_ai(prompt):
 ## The Fix
 
 ```python
-from llm_replay import replay
+from llm_replay_py import replay
+
 
 # With llm-replay: first run costs money, every run after is instant + free
 @replay
@@ -38,7 +39,7 @@ That's it. One import, one decorator.
 ## Installation
 
 ```bash
-pip install llm-replay
+pip install llm-replay-py
 ```
 
 **Zero dependencies.** Uses only Python's standard library (`sqlite3`, `hashlib`, `json`).
@@ -50,7 +51,8 @@ pip install llm-replay
 ### Basic usage
 
 ```python
-from llm_replay import replay
+from llm_replay_py import replay
+
 
 @replay
 def classify_email(email_text: str) -> str:
@@ -62,6 +64,7 @@ def classify_email(email_text: str) -> str:
     )
     return response.choices[0].message.content
 
+
 # First run: calls the real API (takes ~4 seconds)
 result = classify_email("Please refund my order #12345")
 
@@ -72,7 +75,8 @@ result = classify_email("Please refund my order #12345")
 ### Works with any LLM provider
 
 ```python
-from llm_replay import replay
+from llm_replay_py import replay
+
 
 # OpenAI
 @replay
@@ -80,11 +84,13 @@ def ask_openai(prompt: str) -> str:
     import openai
     ...
 
+
 # Anthropic
 @replay
 def ask_claude(prompt: str) -> str:
     import anthropic
     ...
+
 
 # Google Gemini
 @replay
@@ -96,13 +102,13 @@ def ask_gemini(prompt: str) -> str:
 ### Configuration
 
 ```python
-from llm_replay import config
+from llm_replay_py import config
 
 # Call once at the top of your script
 config(
-    ttl_days=7,      # Cache expires after 7 days (default: never)
-    verbose=True,    # Print hit/miss info to logs (default: False)
-    db_path=".cache/llm.db",  # Custom cache location (default: .llm_replay/cache.db)
+    ttl_days=7,  # Cache expires after 7 days (default: never)
+    verbose=True,  # Print hit/miss info to logs (default: False)
+    db_path=".cache/llm.db",  # Custom cache location (default: .llm_replay_py/cache.db)
 )
 ```
 
@@ -116,7 +122,7 @@ result = ask_ai("What is Python?", force_refresh=True)
 ### View cache statistics
 
 ```python
-from llm_replay import stats
+from llm_replay_py import stats
 
 stats()
 # Output:
@@ -134,10 +140,10 @@ stats()
 ### Clear the cache
 
 ```python
-from llm_replay import clear
+from llm_replay_py import clear
 
-clear()              # Wipe everything
-clear("a3f9bc12")   # Wipe one specific entry
+clear()  # Wipe everything
+clear("a3f9bc12")  # Wipe one specific entry
 ```
 
 ---

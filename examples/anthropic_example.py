@@ -11,7 +11,7 @@ To run this example:
 
 import os
 import time
-from llm_replay import replay, config, stats
+from llm_replay_py import replay, config, stats
 
 config(ttl_days=7, verbose=True)
 

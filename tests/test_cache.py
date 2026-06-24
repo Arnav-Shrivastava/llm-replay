@@ -13,7 +13,7 @@ Run all tests with:
     pytest
 
 Run with coverage report:
-    pytest --cov=llm_replay --cov-report=term-missing
+    pytest --cov=llm_replay_py --cov-report=term-missing
 """
 
 import json
@@ -25,8 +25,8 @@ from unittest.mock import MagicMock, patch
 # We import from our installed package, not from src/ directly.
 # This is why the src/ layout matters - it forces us to test
 # the installed package, not the raw source files.
-from llm_replay import replay, config, stats, clear
-from llm_replay.cache import _make_cache_key, _is_expired, _CONFIG, _STATS
+from llm_replay_py import replay, config, stats, clear
+from llm_replay_py.cache import _make_cache_key, _is_expired, _CONFIG, _STATS
 
 
 # ---------------------------------------------------------------------------
@@ -325,7 +325,7 @@ class TestTTL:
         # Manually expire the entry by setting TTL to 0 days
         # and backdating: actually easier to just set very short TTL
         # and mock time. We'll manipulate the DB directly.
-        from llm_replay.cache import _get_connection
+        from llm_replay_py.cache import _get_connection
         conn = _get_connection()
         # Set created_at to 10 days ago
         ten_days_ago = time.time() - (10 * 24 * 60 * 60)
@@ -402,7 +402,7 @@ class TestStatsAndClear:
         ask_b("hello")
 
         # Get the cache key for ask_a
-        from llm_replay.cache import _make_cache_key
+        from llm_replay_py.cache import _make_cache_key
         key_a = _make_cache_key(ask_a.__wrapped__ if hasattr(ask_a, '__wrapped__') else ask_a, ("hello",), {})
 
         # This test verifies clear() doesn't wipe everything

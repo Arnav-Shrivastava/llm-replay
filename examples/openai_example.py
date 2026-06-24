@@ -13,7 +13,7 @@ Run it twice. Watch the second run complete in milliseconds.
 
 import os
 import time
-from llm_replay import replay, config, stats
+from llm_replay_py import replay, config, stats
 
 # Configure the cache at the top of your script, before any @replay functions.
 # ttl_days=7 means responses expire after 7 days and get refreshed automatically.

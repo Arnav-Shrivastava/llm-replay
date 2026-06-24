@@ -7,7 +7,7 @@ Zero-dependency LLM response caching for developers.
 Works with any LLM provider: OpenAI, Anthropic, Gemini, and more.
 
 Basic usage:
-    from llm_replay import replay
+    from llm_replay_py import replay
 
     @replay
     def ask_ai(prompt: str) -> str:
@@ -15,7 +15,7 @@ Basic usage:
         ...
 
 Advanced usage:
-    from llm_replay import replay, config, stats, clear
+    from llm_replay_py import replay, config, stats, clear
 
     # Configure once at the top of your script
     config(ttl_days=7, verbose=True)
@@ -35,17 +35,17 @@ Advanced usage:
 """
 
 # We import everything from cache.py and re-export it.
-# This means users write `from llm_replay import replay`
-# instead of `from llm_replay.cache import replay`.
+# This means users write `from llm_replay_py import replay`
+# instead of `from llm_replay_py.cache import replay`.
 # The public API lives here. The implementation lives in cache.py.
-from llm_replay.cache import (
+from llm_replay_py.cache import (
     replay,
     config,
     stats,
     clear,
 )
 
-# __all__ explicitly declares what `from llm_replay import *` exports.
+# __all__ explicitly declares what `from llm_replay_py import *` exports.
 # This is professional practice - it documents your public API clearly
 # and prevents internal helpers from leaking out.
 __all__ = [

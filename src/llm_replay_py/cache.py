@@ -1,5 +1,5 @@
 """
-llm_replay/cache.py
+llm_replay_py/cache.py
 
 The core engine of llm-replay.
 
@@ -31,9 +31,9 @@ from typing import Any, Callable, Optional, TypeVar
 # We use Python's built-in logging instead of print() statements.
 # This is professional practice - it lets users of our library control
 # whether they see our messages or not, using their own logging config.
-# The logger name "llm_replay" means users can silence us with:
-#   logging.getLogger("llm_replay").setLevel(logging.WARNING)
-logger = logging.getLogger("llm_replay")
+# The logger name "llm_replay_py" means users can silence us with:
+#   logging.getLogger("llm_replay_py").setLevel(logging.WARNING)
+logger = logging.getLogger("llm_replay_py")
 
 # ---------------------------------------------------------------------------
 # Type Hints
@@ -50,7 +50,7 @@ F = TypeVar("F", bound=Callable[..., Any])
 # Users change them by calling config() at the top of their script.
 _CONFIG: dict[str, Any] = {
     # Where to store the SQLite database file
-    "db_path": Path(".llm_replay") / "cache.db",
+    "db_path": Path(".llm_replay_py") / "cache.db",
     # How many days before a cache entry expires (None = never expires)
     "ttl_days": None,
     # Whether to print hit/miss info to the log
@@ -90,7 +90,7 @@ def config(
 
     Args:
         db_path:  Where to store the cache database.
-                  Default: ".llm_replay/cache.db" in your project folder.
+                  Default: ".llm_replay_py/cache.db" in your project folder.
         ttl_days: How many days until a cached response expires.
                   Default: None (cache entries never expire).
                   Pass None explicitly to disable TTL after previously setting it.
@@ -98,7 +98,7 @@ def config(
                   Default: False.
 
     Example:
-        from llm_replay import config
+        from llm_replay_py import config
         config(ttl_days=7, verbose=True)
     """
     if db_path is not None:
@@ -426,7 +426,7 @@ def clear(key: Optional[str] = None) -> None:
              If None (default), deletes ALL entries in the cache.
 
     Example:
-        from llm_replay import clear
+        from llm_replay_py import clear
 
         clear()           # wipe everything
         clear("a3f9bc12") # wipe one specific entry (get key from stats/logs)
